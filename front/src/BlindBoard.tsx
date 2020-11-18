@@ -27,6 +27,7 @@ const TimeToString = (time: string) => {
   return string
 }
 
+const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
 const BlindBoard = ({dummy, listMax}: BoardRow) => { 
 
@@ -34,10 +35,9 @@ const BlindBoard = ({dummy, listMax}: BoardRow) => {
 
   useEffect(() => { 
     const GetList = async () => {
-      const response = await fetch('http://localhost:3000/write')
+      const response = await fetch('http://localhost:' + PORT)
       let json = await response.json()
       console.log(json)
-      
     }
     GetList()
   })
