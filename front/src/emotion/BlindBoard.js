@@ -36,10 +36,7 @@ const Board = css`
                     background-color: #dbdbdb;
                 }
             }
-            ul > a {
-                color: #000;
-            }
-            ul > a > li {
+            ul > li {
                 display: inline-block;
                 height: 50px;
                 line-height: 48px;

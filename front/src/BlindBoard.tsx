@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Board, ButtonSet } from './emotion/BlindBoard'
-import { BrowserRouter, Route, Link, Redirect, Switch } from 'react-router-dom'
-import BlindBoardRead from './components/BlindBoardRead'
 
 interface BoardRow {
   listMax: number
@@ -30,7 +28,7 @@ const TimeToString = (time: string) => {
 
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
-const BlindBoard = ({listMax}: BoardRow) => { 
+const BlindBoard = ({listMax}: BoardRow, {history}: any) => { 
 
   let [list, setList]: any = useState([])  
 
@@ -45,7 +43,6 @@ const BlindBoard = ({listMax}: BoardRow) => {
   
   const GetContent = (e: React.MouseEvent<HTMLUListElement>) => {
     console.log(e.currentTarget.dataset.id)
-    
   }
 
   return (  
@@ -55,15 +52,10 @@ const BlindBoard = ({listMax}: BoardRow) => {
       </div>
       <div id="Board">
         {list.map((v: any, i:any) => (
-          <ul key={v.id} onClick={GetContent} data-id={v.id}>
-            <BrowserRouter>
-              <Link to={`/read/${v.id}`}>
-                <li>{v.title.length > 26 ? v.title.substr(0, 20) + '...' : v.title}</li>
-                <li>{v.author}</li>
-                <li>{TimeToString(v.time)}</li>
-              </Link>
-              <Route path={`/read/${v.id}`} component={BlindBoardRead}></Route>
-            </BrowserRouter>
+          <ul key={v.id} onClick={() => history.push('/about')} data-id={v.id}>
+            <li>{v.title.length > 26 ? v.title.substr(0, 20) + '...' : v.title}</li>
+            <li>{v.author}</li>
+            <li>{TimeToString(v.time)}</li>
           </ul>
         ))}
       </div>
