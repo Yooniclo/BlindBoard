@@ -1,4 +1,6 @@
 import Koa, { Context } from 'koa' 
+import Mysql from 'mysql2/promise'
+
 const Router = require('koa-router')
 const Cors = require('@koa/cors')
 
@@ -8,8 +10,17 @@ const router = new Router()
 app.use(Cors())
 app.use(router.routes())
 
-router.get('/', (ctx: Context) => {
-    ctx.body = { status: 'OK2' }
+const pool = Mysql.createPool({
+    host: '13.209.54.66',
+    user: 'root',
+    password: 'wopsdf',
+    connectionLimit: 4,
+    database: 'blindboard'
+})
+
+router.get('/', async (ctx: Context) => {
+    const rows = await pool.query('SELECT id, title, author, time FROM list ORDER BY time DESC')
+    ctx.body = rows[0]
 })
 
 router.get('/write', (ctx: Context) => {
@@ -31,5 +42,5 @@ router.get('/post', (ctx: Context) => {
 })
 
 app.listen(3000, () => {
-    console.log('heurm server is listening to port 3000')
+    console.log('server is listening to port 3000')
 })

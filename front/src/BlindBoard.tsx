@@ -1,9 +1,10 @@
-import React, { useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Board, ButtonSet } from './emotion/BlindBoard'
+import { BrowserRouter, Route, Link, Redirect, Switch } from 'react-router-dom'
+import BlindBoardRead from './components/BlindBoardRead'
 
 interface BoardRow {
   listMax: number
-  dummy: any
 }
 
 const TimeToString = (time: string) => {
@@ -29,19 +30,24 @@ const TimeToString = (time: string) => {
 
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
-const BlindBoard = ({dummy, listMax}: BoardRow) => { 
+const BlindBoard = ({listMax}: BoardRow) => { 
 
-  const list = dummy.filter((v: string | number , i: number) => i < listMax)
+  let [list, setList]: any = useState([])  
 
   useEffect(() => { 
     const GetList = async () => {
       const response = await fetch('http://localhost:' + PORT)
       let json = await response.json()
-      console.log(json)
+      setList(json.filter((v: string | number , i: number) => i < listMax))
     }
     GetList()
   })
   
+  const GetContent = (e: React.MouseEvent<HTMLUListElement>) => {
+    console.log(e.currentTarget.dataset.id)
+    
+  }
+
   return (  
     <div id="BlindBoard" css={Board}>
       <div id="BoardHeader">
@@ -49,10 +55,15 @@ const BlindBoard = ({dummy, listMax}: BoardRow) => {
       </div>
       <div id="Board">
         {list.map((v: any, i:any) => (
-          <ul key={v.id}>
-            <li>{v.title.substr(0, 20) + '...'}</li>
-            <li>{v.author}</li>
-            <li>{TimeToString(v.time)}</li>
+          <ul key={v.id} onClick={GetContent} data-id={v.id}>
+            <BrowserRouter>
+              <Link to={`/read/${v.id}`}>
+                <li>{v.title.length > 26 ? v.title.substr(0, 20) + '...' : v.title}</li>
+                <li>{v.author}</li>
+                <li>{TimeToString(v.time)}</li>
+              </Link>
+              <Route path={`/read/${v.id}`} component={BlindBoardRead}></Route>
+            </BrowserRouter>
           </ul>
         ))}
       </div>
@@ -69,21 +80,7 @@ const BlindBoard = ({dummy, listMax}: BoardRow) => {
 }
 
 BlindBoard.defaultProps = {
-  listMax: 10,
-  dummy: [
-    {
-      id: 1,
-      title: 'dummy1231dwdfewdfwqfwfwfwfwddadawdawd',
-      author: '간지나는 파이리',
-      time: '2020-11-16 13:44'
-    },
-    {
-      id: 2,
-      title: '안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요',
-      author: '불맛나는 꼬부기',
-      time: '2020-11-16 12:12'
-    }
-  ]
+  listMax: 10
 }
 
 export default BlindBoard
