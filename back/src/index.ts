@@ -1,14 +1,20 @@
 import Koa, { Context } from 'koa' 
 import Mysql from 'mysql2/promise'
+import Path from 'path'
 
 const Router = require('koa-router')
 const Cors = require('@koa/cors')
+const Serve = require('koa-static')
+const Mount = require("koa-mount")
 
 const app = new Koa() 
 const router = new Router()
+const static_page = new Koa()
 
 app.use(Cors())
 app.use(router.routes())
+app.use(Serve(Path.join(__dirname, '../public'), {index: '/'}))
+app.use(Mount("/", static_page))
 
 const pool = Mysql.createPool({
     host: '13.209.54.66',
@@ -21,6 +27,7 @@ const pool = Mysql.createPool({
 router.get('/', async (ctx: Context) => {
     const rows = await pool.query('SELECT id, title, author, time FROM list ORDER BY time DESC')
     ctx.body = rows[0]
+    console.log(__dirname)
 })
 
 router.get('/write', (ctx: Context) => {
@@ -30,6 +37,7 @@ router.get('/write', (ctx: Context) => {
 router.get('/read/:id', (ctx: Context) => {
     const { id } = ctx.params 
     ctx.body = id + '의 소개'
+    console.log(ctx.params)
 })
 
 router.get('/post', (ctx: Context) => {

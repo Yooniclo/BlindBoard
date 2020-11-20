@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Board, ButtonSet } from './emotion/BlindBoard'
-
+import { Link } from 'react-router-dom'
+ 
 interface BoardRow {
   listMax: number
 }
@@ -52,10 +53,12 @@ const BlindBoard = ({listMax}: BoardRow, {history}: any) => {
       </div>
       <div id="Board">
         {list.map((v: any, i:any) => (
-          <ul key={v.id} onClick={() => history.push('/about')} data-id={v.id}>
-            <li>{v.title.length > 26 ? v.title.substr(0, 20) + '...' : v.title}</li>
-            <li>{v.author}</li>
-            <li>{TimeToString(v.time)}</li>
+          <ul key={v.id} data-id={v.id}>
+            <Link to={`/read/${v.id}`}>
+              <li>{v.title.length > 26 ? v.title.substr(0, 20) + '...' : v.title}</li>
+              <li>{v.author}</li>
+              <li>{TimeToString(v.time)}</li>
+            </Link>
           </ul>
         ))}
       </div>
