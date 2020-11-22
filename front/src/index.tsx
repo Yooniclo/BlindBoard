@@ -7,8 +7,8 @@ import BlindBoardRead from './components/BlindBoardRead'
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path={"/"} component={BlindBoard} />
-      <Route path={"/read"} component={BlindBoardRead} />
+      <Route exact path='/' component={BlindBoard} />
+      <Route path='/read' component={BlindBoardRead} />
     </Switch>
   </BrowserRouter>
   ,document.getElementById('root')
