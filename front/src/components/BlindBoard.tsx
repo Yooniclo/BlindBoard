@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Board, ButtonSet } from './emotion/BlindBoard'
+import { Board, ButtonSet } from '../emotion/BlindBoard'
 import { Link } from 'react-router-dom'
  
 interface BoardRow {
@@ -35,12 +35,12 @@ const BlindBoard = ({listMax}: BoardRow, {history}: any) => {
 
   useEffect(() => { 
     const GetList = async () => {
-      const response = await fetch('http://localhost:' + PORT)
+      const response = await fetch('http://localhost:3000/init')
       let json = await response.json()
       setList(json.filter((v: string | number , i: number) => i < listMax))
     }
     GetList()
-  })
+  }, [])
   
   const GetContent = (e: React.MouseEvent<HTMLUListElement>) => {
     console.log(e.currentTarget.dataset.id)
