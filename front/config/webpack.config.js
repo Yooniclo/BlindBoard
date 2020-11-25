@@ -156,6 +156,10 @@ module.exports = function (webpackEnv) {
   };
 
   return {
+    devServer: {
+      port: 3000,
+      historyApiFallback: true
+    },
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,

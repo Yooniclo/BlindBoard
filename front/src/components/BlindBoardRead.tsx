@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Board, ButtonSet } from '../emotion/BlindBoard'
+import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
 
-const BlindBoardRead = () => { 
-  
-  let [list, setList]: any = useState([])  
+interface MatchParams {
+  id: string
+}
 
+const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => { 
+  let [list, setList]: any = useState([])  
   useEffect(() => { 
     const ReadContent = async () => {
-      const response = await fetch('http://localhost:3000/init')
+      const response = await fetch('http://localhost:3000/backend/read/' + match.params.id)
       let json = await response.json()
+      console.log(json)
     }
     ReadContent()
   }, [])

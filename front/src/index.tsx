@@ -8,7 +8,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path='/' component={BlindBoard} />
-      <Route path='/read' component={BlindBoardRead} />
+      <Route path='/read/:id' component={BlindBoardRead} />
     </Switch>
   </BrowserRouter>
   ,document.getElementById('root')
