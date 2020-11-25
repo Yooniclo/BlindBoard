@@ -8,12 +8,12 @@ interface MatchParams {
 }
 
 const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => { 
-  let [list, setList]: any = useState([])  
+  let [content, setContent]: any = useState([])  
   useEffect(() => { 
     const ReadContent = async () => {
       const response = await fetch('http://localhost:3000/backend/read/' + match.params.id)
       let json = await response.json()
-      console.log(json)
+      setContent(content = json[0])
     }
     ReadContent()
   }, [])
@@ -24,7 +24,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
         <h1>익명의 사내게시판📄</h1>
       </div>
       <div id="Board">
- 
+        <div>{content.title}</div>
       </div>
       <div id="BoardFooter">
         <div css={ButtonSet}>

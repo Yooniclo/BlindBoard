@@ -30,7 +30,7 @@ const TimeToString = (time: string) => {
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
 const BlindBoard = ({listMax}: BoardRow, {history}: any) => { 
-
+  
   let [list, setList]: any = useState([])  
 
   useEffect(() => { 
@@ -40,7 +40,7 @@ const BlindBoard = ({listMax}: BoardRow, {history}: any) => {
       setList(json.filter((v: string | number , i: number) => i < listMax))
     }
     GetList()
-  }, [])
+  }, [listMax])
   
   const GetContent = (e: React.MouseEvent<HTMLUListElement>) => {
     console.log(e.currentTarget.dataset.id)
