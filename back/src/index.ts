@@ -28,7 +28,12 @@ router.get('/', async (ctx: Context) => {
 })
 
 router.get('/init', async (ctx: Context) => {
-    const rows = await pool.query('SELECT id, title, author, time FROM list ORDER BY time DESC')
+    const rows = await pool.query(`SELECT id, title, author, time FROM list ORDER BY time DESC`)
+    ctx.body = rows[0]
+})
+
+router.get('/backend/read/:id', async (ctx: Context) => {
+    const rows = await pool.query(`SELECT id, title, author, time, content FROM list WHERE id = ${ctx.params.id}`)
     ctx.body = rows[0]
 })
 
@@ -36,11 +41,6 @@ router.get('/write', (ctx: Context) => {
     ctx.body = '소개'
 })
 
-router.get('/read/:id', (ctx: Context) => {
-    const { id } = ctx.params 
-    ctx.body = id + '의 소개'
-    console.log(ctx.params)
-})
 
 app.listen(3000, () => {
     console.log('server is listening to port 3000')
