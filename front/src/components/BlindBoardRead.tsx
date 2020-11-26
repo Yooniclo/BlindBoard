@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Board, ButtonSet } from '../emotion/BlindBoard'
+import { Board, ButtonSet, BoardRead } from '../emotion/BlindBoard'
 import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
+import TimeToString from './Common'
 
 interface MatchParams {
   id: string
@@ -23,8 +24,15 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
       <div id="BoardHeader">
         <h1>익명의 사내게시판📄</h1>
       </div>
-      <div id="Board">
+      <div id="Board" css={BoardRead}>
         <div>{content.title}</div>
+        <div>
+          <span>{content.author}</span>
+          <span>{TimeToString(content.time)}</span>
+        </div>
+        <div>
+          {content.content}
+        </div>
       </div>
       <div id="BoardFooter">
         <div css={ButtonSet}>

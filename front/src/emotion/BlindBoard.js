@@ -14,52 +14,89 @@ const Board = css`
         width: 568px;
         font-size: 14px; 
     }
-        #BoardHeader{
-            ${[media[0]]} { height: 56px; }
-            ${[media[1]]} { height: 86px; }
+    #BoardHeader{
+        ${[media[0]]} { height: 56px; }
+        ${[media[1]]} { height: 86px; }
+        padding: 10px;
+        box-sizing: border-box;
+        h1 {
+            text-align: center;
+        }
+    }
+    #Board{
+        min-height: 540px;
+        box-shadow: 0 0 10px #dbdbdb;
+        border-radius: 10px;
+        box-sizing: border-box;
+        ul { 
+            width: 100%; 
+            :nth-of-type(even) { background-color: #f5f5f5; }
+            cursor: pointer;
+            a { color: #000; }
+            &:hover {
+                background-color: #dbdbdb;
+            }
+        }
+        ul > a > li {
+            display: inline-block;
+            height: 50px;
+            line-height: 48px;
+            text-align: center;
+            :nth-of-type(1) { width: 60%; }
+            :nth-of-type(2) { width: 25%; }
+            :nth-of-type(3) { width: 15%; }
+        }
+        textarea{
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+    #BoardFooter{
+        display: flex;
+        justify-content: center;
+        .material-icons.md-18 { font-size: 18px; }
+        .material-icons.md-36 { font-size: 36px; }
+        .material-icons.md-48 { font-size: 48px; }
+        a { text-decoration: none; }
+    }
+`
+const BoardRead = css`
+    div:first-of-type {
+        font-size: 16px;
+        text-align: center;
+        border-bottom: 1px solid #dbdbdb;
+        padding: 10px;
+    }
+    div:nth-of-type(2) {
+        width: 100%;
+        span{
+            display: inline-block;
+            width: 50%;
+            border-bottom: 1px solid #dbdbdb;
             padding: 10px;
             box-sizing: border-box;
-            h1 {
-                text-align: center;
-            }
         }
-        #Board{
-            min-height: 540px;
-            box-shadow: 0 0 10px #dbdbdb;
-            border-radius: 10px;
-            box-sizing: border-box;
-            ul { 
-                width: 100%; 
-                :nth-of-type(even) { background-color: #f5f5f5; }
-                cursor: pointer;
-                a { color: #000; }
-                &:hover {
-                    background-color: #dbdbdb;
-                }
-            }
-            ul > a > li {
-                display: inline-block;
-                height: 50px;
-                line-height: 48px;
-                text-align: center;
-                :nth-of-type(1) { width: 60%; }
-                :nth-of-type(2) { width: 25%; }
-                :nth-of-type(3) { width: 15%; }
-            }
-            textarea{
-                width: 100%;
-                box-sizing: border-box;
-            }
+        span:first-of-type {
+            text-align: left;
         }
-        #BoardFooter{
-            display: flex;
-            justify-content: center;
-            .material-icons.md-18 { font-size: 18px; }
-            .material-icons.md-36 { font-size: 36px; }
-            .material-icons.md-48 { font-size: 48px; }
-            a { text-decoration: none; }
+        span:nth-of-type(2){
+            text-align: right;
         }
+    }
+    div:last-of-type {
+        padding: 10px;
+    }
 `
+const BoardWrite = css`
+    textarea {
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        resize: none;
+        padding: 10px;
+    }
+`
+
 
 const ButtonSet = css`
     margin-top: 20px;
@@ -84,5 +121,7 @@ const ButtonSet = css`
 
 export {
     Board,
-    ButtonSet
+    ButtonSet,
+    BoardRead,
+    BoardWrite
 }

@@ -1,30 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Board, ButtonSet } from '../emotion/BlindBoard'
 import { Link } from 'react-router-dom'
+import TimeToString from './Common'
  
 interface BoardRow {
   listMax: number
-}
-
-const TimeToString = (time: string) => {
-  const now: Date = new Date()
-  const reg_time: Date = new Date(time)
-  let string
-
-  let diff = now.getTime() - reg_time.getTime()
-  let days = Math.floor((diff / (1000 * 60 * 60 * 24)))
-  let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-  //let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-  //let seconds = Math.floor((diff % (1000 * 60)) / (1000))
-  if(days > 0){
-    string = days + '일전'
-  }else if(hours > 1 && days === 0){
-    string = hours + '시간전'
-  }else{
-    string = '방금전'
-  }
-
-  return string
 }
 
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
@@ -41,10 +21,6 @@ const BlindBoard = ({listMax}: BoardRow, {history}: any) => {
     }
     GetList()
   }, [listMax])
-  
-  const GetContent = (e: React.MouseEvent<HTMLUListElement>) => {
-    console.log(e.currentTarget.dataset.id)
-  }
 
   return (  
     <div id="BlindBoard" css={Board}>
@@ -65,7 +41,9 @@ const BlindBoard = ({listMax}: BoardRow, {history}: any) => {
       <div id="BoardFooter">
         <div css={ButtonSet}>
           <span className="material-icons">chevron_left</span>
-          <span className="material-icons">edit</span>
+          <Link to='/write'>
+            <span className="material-icons">edit</span>
+          </Link>
           <span className="material-icons">chevron_right</span>
         </div>
       </div>
