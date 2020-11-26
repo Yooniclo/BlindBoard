@@ -24,7 +24,7 @@ const Board = css`
         }
     }
     #Board{
-        min-height: 540px;
+        min-height: 500px;
         box-shadow: 0 0 10px #dbdbdb;
         border-radius: 10px;
         box-sizing: border-box;
@@ -90,11 +90,33 @@ const BoardRead = css`
 const BoardWrite = css`
     textarea {
         width: 100%;
+        height: 415px;
         border: none;
         border-radius: 10px;
         resize: none;
         padding: 10px;
+        :focus {
+            outline: none;
+        }
     }
+    div:first-of-type {
+        height: 40px;
+        border-bottom: 1px solid #dbdbdb;
+        input[type=text] {
+            width: 100%;
+            border-radius: 10px;
+            outline: none;
+            box-sizing: border-box;
+            border: none;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+        }
+    }
+    div:nth-of-type(2) {
+        height: 35px;
+        border-bottom: 1px solid #dbdbdb;
+    } 
 `
 
 

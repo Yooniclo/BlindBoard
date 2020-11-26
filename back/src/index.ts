@@ -6,11 +6,13 @@ const Router = require('koa-router')
 const Cors = require('@koa/cors')
 const Serve = require('koa-static')
 const Sendfile = require('koa-sendfile')
+const Bodyparser = require('koa-bodyparser')
 
 const app = new Koa() 
 const router = new Router()
 
 app.use(Cors())
+app.use(Bodyparser())
 app.use(router.routes())
 app.use(Serve(Path.join(__dirname, '../public')))
 
@@ -37,8 +39,10 @@ router.get('/backend/read/:id', async (ctx: Context) => {
     ctx.body = rows[0]
 })
 
-router.get('/write', (ctx: Context) => {
-    ctx.body = '소개'
+router.post('/backend/write', async (ctx: Context) => {
+    console.log(ctx.request.body)
+    //const rows = await pool.query(`INSERT INTO list(title, author, time, content) VALUES ()`)
+    ctx.body = {message: 'success'}
 })
 
 
