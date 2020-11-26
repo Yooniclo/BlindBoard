@@ -13,10 +13,10 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
     const ReadContent = async () => {
       const response = await fetch('http://localhost:3000/backend/read/' + match.params.id)
       let json = await response.json()
-      setContent(content = json[0])
+      setContent(json[0])
     }
     ReadContent()
-  }, [])
+  }, [match.params.id])
 
   return (  
     <div id="BlindBoard" css={Board}>
