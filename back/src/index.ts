@@ -1,6 +1,7 @@
 import Koa, { Context } from 'koa' 
-import Mysql from 'mysql2/promise'
+import Mysql, { ResultSetHeader } from 'mysql2/promise'
 import Path from 'path'
+import generateToken from './lib/token'
 
 const Router = require('koa-router')
 const Cors = require('@koa/cors')
@@ -40,9 +41,20 @@ router.get('/backend/read/:id', async (ctx: Context) => {
 })
 
 router.post('/backend/write', async (ctx: Context) => {
-    console.log(ctx.request.body)
-    //const rows = await pool.query(`INSERT INTO list(title, author, time, content) VALUES ()`)
-    ctx.body = {message: 'success'}
+    const result: any = await pool.query(`INSERT INTO list(title, author, time, content) VALUES 
+    ('${ctx.request.body.title}', '${ctx.request.body.author}', NOW(), '${ctx.request.body.content}')`)
+
+    if( result[0].affectedRows === 1) {
+        const data = {
+            title: ctx.request.body.title,
+            content: ctx.request.body.content
+        }
+        const token = generateToken(data)
+        console.log(token)
+        ctx.cookies.set('access_token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 })
+        ctx.body = {message: 'success'}
+
+    }
 })
 
 

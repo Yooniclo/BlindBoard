@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Board, ButtonSet, BoardWrite } from '../emotion/BlindBoard'
 import { Link } from 'react-router-dom'
+import Modal from './Modal'
  
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
 const BlindBoardWrite = () => { 
   
+  let [visible, setVisible]: any = useState(false) 
   const inputEl = useRef<HTMLInputElement>(null)
   const textareaEl = useRef<HTMLTextAreaElement>(null)
+  
   useEffect(() => { 
     inputEl.current?.focus()
   }, [inputEl])
@@ -20,7 +23,7 @@ const BlindBoardWrite = () => {
     }
     const firstrandom = Math.floor(Math.random() * (namelist.firstname.length - 0) + 0)
     const lastrandom = Math.floor(Math.random() * (namelist.lastname.length - 0) + 0)
-    const nickname = namelist.firstname[firstrandom] + namelist.lastname[lastrandom]
+    const nickname = namelist.firstname[firstrandom] + ' ' + namelist.lastname[lastrandom]
 
     const data = {
       title: inputEl.current?.value,
@@ -36,7 +39,7 @@ const BlindBoardWrite = () => {
     })
 
     const result = await response.json()
-    console.log(result)
+    if(result.message === 'success') setVisible(true)
   }
 
   return (  
@@ -63,6 +66,7 @@ const BlindBoardWrite = () => {
           </Link>
         </div>
       </div>
+      <Modal visible={visible} type='Route'>작성이 완료되었습니다😀</Modal>
     </div>
   )
   

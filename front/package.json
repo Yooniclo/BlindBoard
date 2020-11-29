@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/core": "7.12.3",
     "@emotion/babel-preset-css-prop": "^10.2.0",
-    "@emotion/core": "^10.1.1",
+    "@emotion/react": "^11.1.1",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
     "@svgr/webpack": "5.4.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -160,6 +160,7 @@
     ]
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.0.0",
     "@storybook/addon-actions": "^6.1.2",
     "@storybook/addon-essentials": "^6.1.2",
     "@storybook/addon-links": "^6.1.2",

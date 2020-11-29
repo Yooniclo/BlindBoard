@@ -1,4 +1,4 @@
-import { css } from '@emotion/core'
+import { css } from '@emotion/react'
 
 const breakpoints = [320, 568]
 
@@ -141,9 +141,22 @@ const ButtonSet = css`
     }
 `
 
+const NormalButton = css`
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 50px;
+    height: 30px;
+    cursor: pointer;
+    &:hover {
+        color: #0078ff;
+    }
+`
+
 export {
     Board,
     ButtonSet,
     BoardRead,
-    BoardWrite
+    BoardWrite,
+    NormalButton
 }
