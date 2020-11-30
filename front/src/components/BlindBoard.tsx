@@ -3,24 +3,42 @@ import { Board, ButtonSet } from '../emotion/BlindBoard'
 import { Link } from 'react-router-dom'
 import TimeToString from './Common'
  
-interface BoardRow {
-  listMax: number
-}
 
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
+let listMax = 10
 
-const BlindBoard = ({listMax}: BoardRow, {history}: any) => { 
+const BlindBoard = ({history}: any) => { 
   
   let [list, setList]: any = useState([])  
+  let [total, setTotal]: any = useState([])
 
   useEffect(() => { 
     const GetList = async () => {
       const response = await fetch('http://localhost:3000/init')
       let json = await response.json()
+      setTotal(json)
       setList(json.filter((v: string | number , i: number) => i < listMax))
     }
     GetList()
-  }, [listMax])
+  }, [])
+
+  const Prev = () => {
+
+    // setList(total.filter((v: string | number , i: number) => i >= listMax)
+    // .filter((v2: string | number , i2: number) => i2 < 10))
+ 
+    // listMax += 10
+
+  }
+
+  const Next = () => {
+    
+    setList(total.filter((v: string | number , i: number) => i >= listMax)
+    .filter((v2: string | number , i2: number) => i2 < 10))
+ 
+    listMax += 10
+
+  }
 
   return (  
     <div id="BlindBoard" css={Board}>
@@ -40,20 +58,16 @@ const BlindBoard = ({listMax}: BoardRow, {history}: any) => {
       </div>
       <div id="BoardFooter">
         <div css={ButtonSet}>
-          <span className="material-icons">chevron_left</span>
+          <span className="material-icons" onClick={Prev}>chevron_left</span>
           <Link to='/write'>
             <span className="material-icons">edit</span>
           </Link>
-          <span className="material-icons">chevron_right</span>
+          <span className="material-icons" onClick={Next}>chevron_right</span>
         </div>
       </div>
     </div>
   )
   
-}
-
-BlindBoard.defaultProps = {
-  listMax: 10
 }
 
 export default BlindBoard
