@@ -1,5 +1,3 @@
-import { css, jsx } from '@emotion/react'
-import { NormalButton } from '../emotion/BlindBoard'
 import React from 'react'
 import { ModalWrapper, ModalOverlay } from '../emotion/Modal'
 import { useHistory } from "react-router-dom"

@@ -10,7 +10,7 @@ const BlindBoardWrite = () => {
   let [visible, setVisible]: any = useState(false) 
   const inputEl = useRef<HTMLInputElement>(null)
   const textareaEl = useRef<HTMLTextAreaElement>(null)
-  
+
   useEffect(() => { 
     inputEl.current?.focus()
   }, [inputEl])
