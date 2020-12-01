@@ -8,11 +8,11 @@ const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 let listMax = 10
 
 const BlindBoard = ({history}: any) => { 
-  
   let [list, setList]: any = useState([])  
   let [total, setTotal]: any = useState([])
 
   useEffect(() => { 
+    listMax = 10
     const GetList = async () => {
       const response = await fetch('http://localhost:3000/init')
       let json = await response.json()
