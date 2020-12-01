@@ -17,27 +17,25 @@ const BlindBoard = ({history}: any) => {
       const response = await fetch('http://localhost:3000/init')
       let json = await response.json()
       setTotal(json)
-      setList(json.filter((v: string | number , i: number) => i < listMax))
+      setList(json.filter((v: string | number, i: number) => i < listMax))
     }
     GetList()
   }, [])
 
   const Prev = () => {
-
-    // setList(total.filter((v: string | number , i: number) => i >= listMax)
-    // .filter((v2: string | number , i2: number) => i2 < 10))
- 
-    // listMax += 10
-
+    if(listMax > 10) {
+      listMax -= 10
+      setList(total.filter((v: string | number, i: number) => i < listMax)
+      .filter((v2: string | number, i2: number) => i2 >= listMax - 10))
+    }
   }
 
   const Next = () => {
-    
-    setList(total.filter((v: string | number , i: number) => i >= listMax)
-    .filter((v2: string | number , i2: number) => i2 < 10))
- 
-    listMax += 10
-
+    if(listMax < total.length) {
+      setList(total.filter((v: string | number, i: number) => i >= listMax)
+      .filter((v2: string | number, i2: number) => i2 < 10))
+      listMax += 10
+    }
   }
 
   return (  
