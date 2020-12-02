@@ -26,11 +26,28 @@ const BlindBoardWrite = () => {
     const lastrandom = Math.floor(Math.random() * (namelist.lastname.length - 0) + 0)
     const nickname = namelist.firstname[firstrandom] + ' ' + namelist.lastname[lastrandom]
 
-    const data = {
+    type Data = {
+      title: string | undefined,
+      author: string | undefined,
+      content: string | undefined
+    }
+
+    const data: Data = {
       title: inputEl.current?.value,
       author: nickname,
       content: textareaEl.current?.value
     }
+
+    if(data.title?.length === 0 || data.content?.length === 0){
+      const setVisible = () => dispatch({ type: 'SET_VISIBLE', visible: true })
+      const setType = () => dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Normal' })
+      const setMessage = () => dispatch({ type: 'SET_MESSAGE', message: '내용을 입력하지 않았습니다..😅' })
+      setVisible()
+      setType()
+      setMessage()
+      return false
+    }
+
     const response = await fetch('http://localhost:3000/backend/write', {
       method: 'POST',
       headers: {
