@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Board, ButtonSet, BoardWrite } from '../emotion/BlindBoard'
 import { Link } from 'react-router-dom'
 import { useModalDispatch } from '../context/ModalContext'
+import BlankCheck from './Validation'
 
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
@@ -38,7 +39,7 @@ const BlindBoardWrite = () => {
       content: textareaEl.current?.value
     }
 
-    if(data.title?.length === 0 || data.content?.length === 0){
+    if(!BlankCheck(data.title) || !BlankCheck(data.content)){
       const setVisible = () => dispatch({ type: 'SET_VISIBLE', visible: true })
       const setType = () => dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Normal' })
       const setMessage = () => dispatch({ type: 'SET_MESSAGE', message: '내용을 입력하지 않았습니다..😅' })
