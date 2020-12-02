@@ -19,8 +19,8 @@ const BlindBoardWrite = () => {
   const Write = async () => {
     
     const namelist = {
-      firstname: ['작은', '큰', '빨간', '푸른', '붉은', '파란', '바보', '멍청한', '미친', '아기', '강철의'],
-      lastname: ['곰', '상자', '뱀', '상어', '닝겐', '사람', '연금술사', '소보루']
+      firstname: ['작은', '큰', '귀여운', '푸른', '붉은', '파란', '바보', '멍청한', '미친', '아기', '강철의'],
+      lastname: ['곰', '상자', '뱀', '상어', '닝겐', '사람', '연금술사', '소보루', '멍청이', '아빠', '부장님']
     }
     const firstrandom = Math.floor(Math.random() * (namelist.firstname.length - 0) + 0)
     const lastrandom = Math.floor(Math.random() * (namelist.lastname.length - 0) + 0)

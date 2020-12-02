@@ -49,8 +49,7 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
   return (
     <ModalStateContext.Provider value={state}>
       <ModalDispatchContext.Provider value={dispatch}>
-        <Modal type={state.modal_type} visible={state.visible}>{state.message}</Modal>
-        {children}
+        <Modal type={state.modal_type} visible={state.visible}>{state.message}</Modal>{children}
       </ModalDispatchContext.Provider>
     </ModalStateContext.Provider>
   )
