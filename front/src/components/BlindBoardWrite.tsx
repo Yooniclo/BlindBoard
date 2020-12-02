@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Board, ButtonSet, BoardWrite } from '../emotion/BlindBoard'
 import { Link } from 'react-router-dom'
-import Modal from './Modal'
- 
+import { useModalDispatch } from '../context/ModalContext'
+
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
 const BlindBoardWrite = () => { 
-  
-  let [visible, setVisible]: any = useState(false) 
+
+  const dispatch = useModalDispatch()
+
   const inputEl = useRef<HTMLInputElement>(null)
   const textareaEl = useRef<HTMLTextAreaElement>(null)
 
@@ -39,7 +40,14 @@ const BlindBoardWrite = () => {
     })
 
     const result = await response.json()
-    if(result.message === 'success') setVisible(true)
+    if(result.message === 'success') {
+      const setVisible = () => dispatch({ type: 'SET_VISIBLE', visible: true })
+      const setType = () => dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Route' })
+      const setMessage = () => dispatch({ type: 'SET_MESSAGE', message: '작성이 완료되었습니다😀' })
+      setVisible()
+      setType()
+      setMessage()
+    }
   }
 
   return (  
@@ -66,7 +74,6 @@ const BlindBoardWrite = () => {
           </Link>
         </div>
       </div>
-      <Modal visible={visible} type='Route'>작성이 완료되었습니다😀</Modal>
     </div>
   )
   
