@@ -7,7 +7,7 @@ import TimeToString from './Common'
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 let listMax = 10
 
-const BlindBoard = ({history}: any) => { 
+const BlindBoard = () => { 
   let [list, setList]: any = useState([])  
   let [total, setTotal]: any = useState([])
 
