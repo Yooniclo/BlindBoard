@@ -36,9 +36,18 @@ router.get('/init', async (ctx: Context) => {
 })
 
 router.get('/backend/read/:id', async (ctx: Context) => {
-    // const decode_token = await decodeToken(ctx.cookies.get('access_token'))
     const rows = await pool.query(`SELECT id, title, author, time, content FROM list WHERE id = ${ctx.params.id}`)
     ctx.body = rows[0]
+})
+
+router.get('/write', async (ctx: Context) => {
+    try {
+        const decode_token = await decodeToken(ctx.cookies.get('access_token'))
+        console.log('a', decode_token)
+        if(!decode_token) ctx.redirect('/')
+    } catch(e) {
+        console.log(e)
+    }
 })
 
 router.post('/backend/write', async (ctx: Context) => {
@@ -50,8 +59,8 @@ router.post('/backend/write', async (ctx: Context) => {
             title: ctx.request.body.title,
             content: ctx.request.body.content
         }
-        // const token = generateToken(data)
-        // ctx.cookies.set('access_token', token, { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 7 })
+        const token = generateToken(data)
+        ctx.cookies.set('access_token', token, { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 7 })
         ctx.body = {message: 'success'}
     }
 })
