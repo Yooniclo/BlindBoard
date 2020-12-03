@@ -34,18 +34,15 @@ const BlindBoardWrite = () => {
     }
 
     const data: Data = {
-      title: inputEl.current?.value,
+      title: inputEl.current?.value.replace(/'/g, "\\'"),
       author: nickname,
-      content: textareaEl.current?.value
+      content: textareaEl.current?.value.replace(/'/g, "\\'")
     }
 
     if(!BlankCheck(data.title) || !BlankCheck(data.content)){
-      const setVisible = () => dispatch({ type: 'SET_VISIBLE', visible: true })
-      const setType = () => dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Normal' })
-      const setMessage = () => dispatch({ type: 'SET_MESSAGE', message: '내용을 입력하지 않았습니다..😅' })
-      setVisible()
-      setType()
-      setMessage()
+      dispatch({ type: 'SET_VISIBLE', visible: true })
+      dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Normal' })
+      dispatch({ type: 'SET_MESSAGE', message: '내용을 입력하지 않았습니다..😅' })
       return false
     }
 
@@ -59,12 +56,9 @@ const BlindBoardWrite = () => {
 
     const result = await response.json()
     if(result.message === 'success') {
-      const setVisible = () => dispatch({ type: 'SET_VISIBLE', visible: true })
-      const setType = () => dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Route' })
-      const setMessage = () => dispatch({ type: 'SET_MESSAGE', message: '작성이 완료되었습니다😀' })
-      setVisible()
-      setType()
-      setMessage()
+      dispatch({ type: 'SET_VISIBLE', visible: true })
+      dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Route' })
+      dispatch({ type: 'SET_MESSAGE', message: '작성이 완료되었습니다😀' })
     }
   }
 

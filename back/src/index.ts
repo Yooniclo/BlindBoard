@@ -1,10 +1,10 @@
 import Koa, { Context } from 'koa' 
 import Mysql, { ResultSetHeader } from 'mysql2/promise'
 import Path from 'path'
-import generateToken from './lib/token'
+import { generateToken, decodeToken } from './lib/token'
 
 const Router = require('koa-router')
-const Cors = require('@koa/cors')
+const Cors = require('koa2-cors')
 const Serve = require('koa-static')
 const Sendfile = require('koa-sendfile')
 const Bodyparser = require('koa-bodyparser')
@@ -36,6 +36,7 @@ router.get('/init', async (ctx: Context) => {
 })
 
 router.get('/backend/read/:id', async (ctx: Context) => {
+    // const decode_token = await decodeToken(ctx.cookies.get('access_token'))
     const rows = await pool.query(`SELECT id, title, author, time, content FROM list WHERE id = ${ctx.params.id}`)
     ctx.body = rows[0]
 })
@@ -44,16 +45,14 @@ router.post('/backend/write', async (ctx: Context) => {
     const result: any = await pool.query(`INSERT INTO list(title, author, time, content) VALUES 
     ('${ctx.request.body.title}', '${ctx.request.body.author}', NOW(), '${ctx.request.body.content}')`)
 
-    if( result[0].affectedRows === 1) {
+    if(result[0].affectedRows === 1) {
         const data = {
             title: ctx.request.body.title,
             content: ctx.request.body.content
         }
-        const token = generateToken(data)
-        console.log(token)
-        ctx.cookies.set('access_token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 })
+        // const token = generateToken(data)
+        // ctx.cookies.set('access_token', token, { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 7 })
         ctx.body = {message: 'success'}
-
     }
 })
 

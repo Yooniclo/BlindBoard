@@ -1,7 +1,8 @@
+let flag: boolean
+
 const BlankCheck = (content: string | undefined) => {
-    if(content?.length === 0){
-        return false
-    }
+    content?.length === 0 ? flag = false : flag = true
+    return flag
 }
   
 export default BlankCheck

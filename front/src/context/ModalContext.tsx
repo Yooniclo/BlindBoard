@@ -12,7 +12,7 @@ type Action =
   | { type: 'SET_MESSAGE'; message: string }
   | { type: 'SET_VISIBLE'; visible: boolean }
 
-type ModalDispatch = Dispatch<Action>;
+type ModalDispatch = Dispatch<Action>
 
 const ModalStateContext = createContext<State | null>(null)
 const ModalDispatchContext = createContext<ModalDispatch | null>(null)
