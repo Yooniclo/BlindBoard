@@ -25,8 +25,7 @@ const pool = Mysql.createPool({
     database: 'blindboard'
 })
 
-
-router.get('/', async (ctx: Context) => {
+app.use(async ctx => {
     await Sendfile(ctx, Path.join(__dirname, '../public/index.html'))
 })
 
@@ -38,16 +37,6 @@ router.get('/init', async (ctx: Context) => {
 router.get('/backend/read/:id', async (ctx: Context) => {
     const rows = await pool.query(`SELECT id, title, author, time, content FROM list WHERE id = ${ctx.params.id}`)
     ctx.body = rows[0]
-})
-
-router.get('/write', async (ctx: Context) => {
-    try {
-        const decode_token = await decodeToken(ctx.cookies.get('access_token'))
-        console.log('a', decode_token)
-        if(!decode_token) ctx.redirect('/')
-    } catch(e) {
-        console.log(e)
-    }
 })
 
 router.post('/backend/write', async (ctx: Context) => {
@@ -64,7 +53,6 @@ router.post('/backend/write', async (ctx: Context) => {
         ctx.body = {message: 'success'}
     }
 })
-
 
 app.listen(3000, () => {
     console.log('server is listening to port 3000')
