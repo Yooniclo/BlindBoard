@@ -6,17 +6,17 @@ const media = breakpoints.map( bp => `@media (min-width: ${bp}px)` )
 
 const Board = css`
     min-width: 320px;
-    ${[media[0]]} { 
+    ${media[0]} { 
         width: 90%;
         font-size: 11px;
     }
-    ${[media[1]]} { 
+    ${media[1]} { 
         width: 568px;
         font-size: 14px; 
     }
     #BoardHeader{
-        ${[media[0]]} { height: 56px; }
-        ${[media[1]]} { height: 86px; }
+        ${media[0]} { height: 56px; }
+        ${media[1]} { height: 86px; }
         padding: 10px;
         box-sizing: border-box;
         h1 {
@@ -24,7 +24,6 @@ const Board = css`
         }
     }
     #Board{
-        min-height: 500px;
         box-shadow: 0 0 10px #dbdbdb;
         border-radius: 10px;
         box-sizing: border-box;
@@ -39,8 +38,8 @@ const Board = css`
         }
         ul > a > li {
             display: inline-block;
-            height: 50px;
-            line-height: 48px;
+            ${media[0]} { height: 44px; line-height: 44px; }
+            ${media[1]} { height: 48px; line-height: 48px; }
             text-align: center;
             :nth-of-type(1) { width: 60%; }
             :nth-of-type(2) { width: 25%; }

@@ -9,11 +9,16 @@ const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 const BlindBoardWrite = () => { 
 
   const dispatch = useModalDispatch()
-
   const inputEl = useRef<HTMLInputElement>(null)
   const textareaEl = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => { 
+    const Auth = async () => {
+      const response = await fetch('http://localhost:3000/auth')
+      let json = await response.json()
+      console.log(json)
+    }
+    Auth()
     inputEl.current?.focus()
   }, [inputEl])
 
@@ -55,7 +60,7 @@ const BlindBoardWrite = () => {
     })
 
     const result = await response.json()
-    if(result.message === 'success') {
+    if(result.message === 'Success') {
       dispatch({ type: 'SET_VISIBLE', visible: true })
       dispatch({ type: 'SET_MODAL_TYPE', modal_type: 'Route' })
       dispatch({ type: 'SET_MESSAGE', message: '작성이 완료되었습니다😀' })

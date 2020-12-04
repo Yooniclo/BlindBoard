@@ -34,6 +34,11 @@ router.get('/init', async (ctx: Context) => {
     ctx.body = rows[0]
 })
 
+router.get('/auth', async (ctx: Context) => {
+    const token = ctx.cookies.get('access_token')
+    if(!token) ctx.body = {message: 'Not Auth'}
+})
+
 router.get('/backend/read/:id', async (ctx: Context) => {
     const rows = await pool.query(`SELECT id, title, author, time, content FROM list WHERE id = ${ctx.params.id}`)
     ctx.body = rows[0]
@@ -50,7 +55,7 @@ router.post('/backend/write', async (ctx: Context) => {
         }
         const token = generateToken(data)
         ctx.cookies.set('access_token', token, { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 7 })
-        ctx.body = {message: 'success'}
+        ctx.body = {message: 'Success'}
     }
 })
 
