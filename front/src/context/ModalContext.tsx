@@ -39,7 +39,7 @@ const Reducer = (state: State, action: Action): State => {
   }
 }
 
-export function ModalProvider({ children }: { children: React.ReactNode }) {
+export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   let [state, dispatch] = useReducer(Reducer, {
     modal_type: 'Normal',
     message: '',
@@ -56,13 +56,13 @@ export function ModalProvider({ children }: { children: React.ReactNode }) {
 }
 
 // state 와 dispatch 를 쉽게 사용하기 위한 커스텀 Hooks
-export function useModalState() {
+export const useModalState = () => {
   const state = useContext(ModalStateContext)
   if (!state) throw new Error('Cannot find ModalProvider')
   return state
 }
 
-export function useModalDispatch() {
+export const useModalDispatch = () => {
   const dispatch = useContext(ModalDispatchContext)
   if (!dispatch) throw new Error('Cannot find ModalProvider')
   return dispatch

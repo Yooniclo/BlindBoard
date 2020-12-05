@@ -24,6 +24,7 @@ const Board = css`
         }
     }
     #Board{
+        min-height: 480px;
         box-shadow: 0 0 10px #dbdbdb;
         border-radius: 10px;
         box-sizing: border-box;

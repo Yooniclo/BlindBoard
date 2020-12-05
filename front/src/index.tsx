@@ -6,17 +6,20 @@ import BlindBoardWrite from './components/BlindBoardWrite'
 import BlindBoardSignin from './components/BlindBoardSignin'
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import { ModalProvider } from './context/ModalContext'
+import { TokenProvider } from './context/TokenContext'
 
 ReactDOM.render(
   <BrowserRouter>
-      <Switch>
+    <Switch>
+      <TokenProvider>
         <Route exact path='/' component={BlindBoard} />
-      <ModalProvider>
-        <Route path='/signin' component={BlindBoardSignin} />
-        <Route path='/read/:id' component={BlindBoardRead} />
-        <Route path='/write' component={BlindBoardWrite} />
-      </ModalProvider>
-      </Switch>
-    </BrowserRouter>
+        <ModalProvider>
+          <Route path='/signin' component={BlindBoardSignin} />
+          <Route path='/write' component={BlindBoardWrite} />
+          <Route path='/read/:id' component={BlindBoardRead} />
+        </ModalProvider>
+      </TokenProvider>
+    </Switch>
+  </BrowserRouter>
   ,document.getElementById('root')
 )

@@ -35,8 +35,8 @@ router.get('/init', async (ctx: Context) => {
 })
 
 router.get('/auth', async (ctx: Context) => {
-    const token = ctx.cookies.get('access_token')
-    if(!token) ctx.body = {message: 'Not Auth'}
+    // const token = ctx.cookies.get('access_token')
+    // if(!token) ctx.body = {message: 'Not Auth'}
 })
 
 router.get('/backend/read/:id', async (ctx: Context) => {
@@ -49,12 +49,12 @@ router.post('/backend/write', async (ctx: Context) => {
     ('${ctx.request.body.title}', '${ctx.request.body.author}', NOW(), '${ctx.request.body.content}')`)
 
     if(result[0].affectedRows === 1) {
-        const data = {
-            title: ctx.request.body.title,
-            content: ctx.request.body.content
-        }
-        const token = generateToken(data)
-        ctx.cookies.set('access_token', token, { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 7 })
+        // const data = {
+        //     title: ctx.request.body.title,
+        //     content: ctx.request.body.content
+        // }
+        // const token = generateToken(data)
+        // ctx.cookies.set('access_token', token, { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 7 })
         ctx.body = {message: 'Success'}
     }
 })

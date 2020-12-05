@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { Board, ButtonSet, BoardWrite } from '../emotion/BlindBoard'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, Redirect } from 'react-router-dom'
 import { useModalDispatch } from '../context/ModalContext'
+import { useTokenState } from '../context/TokenContext'
 import BlankCheck from './Validation'
 
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
@@ -11,14 +12,11 @@ const BlindBoardWrite = () => {
   const dispatch = useModalDispatch()
   const inputEl = useRef<HTMLInputElement>(null)
   const textareaEl = useRef<HTMLTextAreaElement>(null)
+  let history = useHistory()
+
+  console.log(useTokenState().token)
 
   useEffect(() => { 
-    const Auth = async () => {
-      const response = await fetch('http://localhost:3000/auth')
-      let json = await response.json()
-      console.log(json)
-    }
-    Auth()
     inputEl.current?.focus()
   }, [inputEl])
 
@@ -68,6 +66,10 @@ const BlindBoardWrite = () => {
   }
 
   return (  
+    useTokenState().token=== 'Not Set'
+    ?
+    <Redirect to='/signin' />
+    :
     <div id="BlindBoard" css={Board}>
       <div id="BoardHeader">
         <h1>익명의 사내게시판📄</h1>
