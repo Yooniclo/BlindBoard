@@ -11,8 +11,13 @@ const Modal = (props: any) => {
     const el = document.getElementById("modal-root")
     const dispatch = useModalDispatch()
 
+    const MoveRoute = () => {
+        dispatch({ type: 'SET_VISIBLE', visible: false })
+        history.push('/')
+    }
+
     const Route = (props: any) => {
-        return <button onClick={()=> history.push('/')}>확인</button>
+        return <button onClick={MoveRoute}>확인</button>
     }
 
     const Normal = (props: any) => {
