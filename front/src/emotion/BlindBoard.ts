@@ -152,11 +152,20 @@ const NormalButton = css`
         color: #0078ff;
     }
 `
+const KakaoButton = css`
+    button {
+        position: relative;
+        left: 50%;
+        margin-left: -111px;
+        margin-top: 200px;
+    }
+`
 
 export {
     Board,
     ButtonSet,
     BoardRead,
     BoardWrite,
-    NormalButton
+    NormalButton,
+    KakaoButton
 }

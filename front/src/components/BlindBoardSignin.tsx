@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Board, ButtonSet } from '../emotion/BlindBoard'
+import { Board, ButtonSet, KakaoButton } from '../emotion/BlindBoard'
 import { Link, useHistory } from 'react-router-dom'
 import KakaoLogin from 'react-kakao-login'
 import { useTokenDispatch, useTokenState } from '../context/TokenContext'
@@ -25,7 +25,7 @@ const BlindBoardSignin = () => {
       <div id="BoardHeader">
         <h1>익명의 사내게시판📄</h1>
       </div>
-      <div id="Board">
+      <div id="Board" css={KakaoButton}>
         <KakaoLogin token={token} onSuccess={Next} onFail={console.error} onLogout={console.info}>카카오계정으로 로그인</KakaoLogin>
       </div>
       <div id="BoardFooter">
