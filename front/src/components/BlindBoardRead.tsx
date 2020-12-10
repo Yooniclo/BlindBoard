@@ -35,6 +35,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
         </div>
         <div css={ReplyFloatingButton}>
           <span className="material-icons md-24">quickreply</span>
+          <p>1개의 댓글</p>
         </div>
       </div>
       <div id="BoardFooter">

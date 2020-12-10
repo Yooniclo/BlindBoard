@@ -184,9 +184,12 @@ const ReplyFloatingButton = css `
     span {
         color: #fff;
         position: relative;
-        left: 6px;
-        top: 7px;
-
+        ${media[0]} { top: 5.2px; left: 5px; }
+        ${media[1]} { top: 7px; left: 6px; }
+    }
+    p {
+        width: 100px;
+        padding-top: 10px;
     }
 `
 
