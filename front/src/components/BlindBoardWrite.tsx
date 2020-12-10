@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Board, ButtonSet, BoardWrite } from '../emotion/BlindBoard'
-import { Link, useHistory, Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { useModalDispatch } from '../context/ModalContext'
 import { useTokenState } from '../context/TokenContext'
 import BlankCheck from './Validation'
@@ -12,9 +12,6 @@ const BlindBoardWrite = () => {
   const dispatch = useModalDispatch()
   const inputEl = useRef<HTMLInputElement>(null)
   const textareaEl = useRef<HTMLTextAreaElement>(null)
-  let history = useHistory()
-
-  console.log(useTokenState().token)
 
   useEffect(() => { 
     inputEl.current?.focus()

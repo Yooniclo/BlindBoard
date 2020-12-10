@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Board, ButtonSet, KakaoButton } from '../emotion/BlindBoard'
 import { Link, useHistory } from 'react-router-dom'
 import KakaoLogin from 'react-kakao-login'
-import { useTokenDispatch, useTokenState } from '../context/TokenContext'
+import { useTokenDispatch } from '../context/TokenContext'
 
 const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
 
@@ -26,6 +26,7 @@ const BlindBoardSignin = () => {
         <h1>익명의 사내게시판📄</h1>
       </div>
       <div id="Board" css={KakaoButton}>
+        <p>글을 작성하려면 로그인이 필요합니다😀</p>
         <KakaoLogin token={token} onSuccess={Next} onFail={console.error} onLogout={console.info}>카카오계정으로 로그인</KakaoLogin>
       </div>
       <div id="BoardFooter">

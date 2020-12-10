@@ -5,6 +5,9 @@ const breakpoints = [320, 568]
 const media = breakpoints.map( bp => `@media (min-width: ${bp}px)` )
 
 const Board = css`
+    .material-icons.md-18 { font-size: 18px; }
+    .material-icons.md-36 { font-size: 36px; }
+    .material-icons.md-48 { font-size: 48px; }
     min-width: 320px;
     ${media[0]} { 
         width: 90%;
@@ -39,8 +42,8 @@ const Board = css`
         }
         ul > a > li {
             display: inline-block;
-            ${media[0]} { height: 44px; line-height: 44px; }
-            ${media[1]} { height: 48px; line-height: 48px; }
+            height: 48px; 
+            line-height: 48px;
             text-align: center;
             :nth-of-type(1) { width: 60%; }
             :nth-of-type(2) { width: 25%; }
@@ -54,9 +57,6 @@ const Board = css`
     #BoardFooter{
         display: flex;
         justify-content: center;
-        .material-icons.md-18 { font-size: 18px; }
-        .material-icons.md-36 { font-size: 36px; }
-        .material-icons.md-48 { font-size: 48px; }
         a { text-decoration: none; }
     }
 `
@@ -83,7 +83,7 @@ const BoardRead = css`
             text-align: right;
         }
     }
-    div:last-of-type {
+    div:nth-of-type(3) {
         padding: 10px;
     }
 `
@@ -153,11 +153,40 @@ const NormalButton = css`
     }
 `
 const KakaoButton = css`
+    p {
+        text-align: center;
+        font-size: 16px;
+        position: relative;
+        top: 40px;
+    }
     button {
         position: relative;
         left: 50%;
         margin-left: -111px;
         margin-top: 200px;
+    }
+`
+const ReplyFloatingButton = css `
+    box-shadow: 0 0 10px #dbdbdb;
+    float:right;
+    background-color: skyblue;
+    border-radius: 35px;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    right: 10px;
+    cursor: pointer;
+    &:hover {
+        background-color: #0078ff;
+    }
+    ${media[0]} { top: 315px; }
+    ${media[1]} { top: 305px; }
+    span {
+        color: #fff;
+        position: relative;
+        left: 6px;
+        top: 7px;
+
     }
 `
 
@@ -167,5 +196,6 @@ export {
     BoardRead,
     BoardWrite,
     NormalButton,
-    KakaoButton
+    KakaoButton,
+    ReplyFloatingButton
 }

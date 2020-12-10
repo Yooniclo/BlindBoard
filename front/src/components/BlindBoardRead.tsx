@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Board, ButtonSet, BoardRead } from '../emotion/BlindBoard'
+import { Board, ButtonSet, BoardRead, ReplyFloatingButton } from '../emotion/BlindBoard'
 import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
 import TimeToString from './Common'
@@ -32,6 +32,9 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
         </div>
         <div>
           {content.content}
+        </div>
+        <div css={ReplyFloatingButton}>
+          <span className="material-icons md-24">quickreply</span>
         </div>
       </div>
       <div id="BoardFooter">
