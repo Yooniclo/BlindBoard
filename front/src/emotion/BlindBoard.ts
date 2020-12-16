@@ -61,13 +61,13 @@ const Board = css`
     }
 `
 const BoardRead = css`
-    div:first-of-type {
+    .content-title {
         font-size: 16px;
         text-align: center;
         border-bottom: 1px solid #dbdbdb;
         padding: 10px;
     }
-    div:nth-of-type(2) {
+    .content-body {
         width: 100%;
         span{
             display: inline-block;
@@ -167,31 +167,41 @@ const KakaoButton = css`
     }
 `
 const ReplyFloatingButton = css `
-    box-shadow: 0 0 10px #dbdbdb;
-    float:right;
-    background-color: skyblue;
-    border-radius: 35px;
-    width: 35px;
-    height: 35px;
+    width: 140px;
+    height: 50px;
+    line-height: 30px;
     position: relative;
     right: 10px;
-    cursor: pointer;
-    &:hover {
-        background-color: #0078ff;
-    }
+    float: right;
     ${media[0]} { top: 315px; }
     ${media[1]} { top: 305px; }
-    span {
-        color: #fff;
-        position: relative;
-        ${media[0]} { top: 5.2px; left: 5px; }
-        ${media[1]} { top: 7px; left: 6px; }
-    }
-    p {
+    div { display: inline-block; }
+    div:first-of-type {
         width: 100px;
-        padding-top: 10px;
+        text-align: right;
+    }
+    div:last-of-type {
+        width: 30%;
+        box-shadow: 0 0 10px #dbdbdb;
+        float: right;
+        background-color: #fff;
+        border-radius: 35px;
+        width: 35px;
+        height: 35px;
+        position: relative;
+        cursor: pointer;
+        &:hover {
+            background-color: #dbdbdb;
+        }
+        span {
+            position: relative;
+            top: 7px;
+            left: 6px;
+        }
     }
 `
+
+
 
 export {
     Board,
