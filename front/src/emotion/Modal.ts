@@ -45,13 +45,11 @@ const ModalOverlay = css`
 
 const ReplyModalWrapper = css`
     text-align: center;
-    height: 80vh;
     position: fixed;
     left: 50%;
     top: 50%;
-    ${media[0]} { width: 90vw; margin-left: -45vw; }
-    ${media[1]} { width: 70vw; margin-left: -35vw; }
-    margin-top: -40vh;
+    ${media[0]} { width: 90vw; margin-left: -45vw; height: 80vh; margin-top: -40vh;}
+    ${media[1]} { width: 70vw; margin-left: -35vw; height: 40vh; margin-top: -20vh;}
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 1000;
     border-radius: 10px;
