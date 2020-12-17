@@ -1,5 +1,5 @@
 import Koa, { Context } from 'koa' 
-import Mysql, { ResultSetHeader } from 'mysql2/promise'
+import Mysql from 'mysql2/promise'
 import Path from 'path'
 import { generateToken, decodeToken } from './lib/token'
 
@@ -41,6 +41,17 @@ router.get('/auth', async (ctx: Context) => {
 
 router.get('/backend/read/:id', async (ctx: Context) => {
     const rows = await pool.query(`SELECT id, title, author, time, content FROM list WHERE id = ${ctx.params.id}`)
+    ctx.body = rows[0]
+})
+
+router.get('/backend/reply/count/:id', async (ctx: Context) => {
+    const rows = await pool.query(`SELECT count(*) AS count FROM reply WHERE list_id = ${ctx.params.id}`)
+    console.log(rows)
+    ctx.body = rows[0]
+})
+
+router.get('/backend/reply/read/:id', async (ctx: Context) => {
+    const rows = await pool.query(`SELECT * FROM reply WHERE list_id = ${ctx.params.id}`)
     ctx.body = rows[0]
 })
 

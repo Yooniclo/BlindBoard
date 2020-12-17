@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Board, ButtonSet, BoardRead, ReplyFloatingButton } from '../emotion/BlindBoard'
 import { ModalOverlay, ReplyModalWrapper } from '../emotion/Modal'
 import { RouteComponentProps } from 'react-router'
@@ -11,15 +11,35 @@ interface MatchParams {
 
 const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => { 
   let [content, setContent]: any = useState([])  
+  let [reply_count, setReplyCount]: any = useState(0)  
+  let [reply_content, setReplyContent]: any = useState([])  
   let [visible, setVisible]: any = useState(false)
+
+  const textareaEl = useRef<HTMLTextAreaElement>(null)
+
   useEffect(() => { 
     const ReadContent = async () => {
       const response = await fetch('http://localhost:3000/backend/read/' + match.params.id)
       let json = await response.json()
       setContent(json[0])
     }
+    const ReplyCount = async () => {
+      const response = await fetch('http://localhost:3000/backend/reply/count/' + match.params.id)
+      let json = await response.json()
+      console.log(json)
+      //setReplyCount(json[0])
+    }
     ReadContent()
+    ReplyCount()
   }, [match.params.id])
+
+  const OpenReplyModal = async() => {
+    const response = await fetch('http://localhost:3000/backend/reply/read/' + match.params.id)
+    let json = await response.json()
+    setReplyContent(json[0])  
+    console.log(json[0])
+    setVisible(true)
+  }
 
   return (  
     <div id="BlindBoard" css={Board}>
@@ -37,7 +57,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
           <div css={ReplyFloatingButton}>
           <div>1개의 댓글</div>
           <div>
-            <span className="material-icons md-24" onClick={()=>setVisible(true)}>quickreply</span>
+            <span className="material-icons md-24" onClick={OpenReplyModal}>quickreply</span>
           </div>
         </div>
         </div>
@@ -53,8 +73,20 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
       <div id="ReplyModal">
         <div css={ModalOverlay}></div>
           <div css={ReplyModalWrapper}>
-            <div></div>
-            <div><button onClick={()=>setVisible(false)}>닫기</button></div>
+            <div className="reply-wrapper">
+              <div className="reply-header">
+                <div>{reply_content.author}</div>
+                <div>{TimeToString(reply_content.time)}</div>
+              </div>
+              <div className="reply-contents">{reply_content.content}</div>
+            </div>
+            <div className="reply-write-set">
+              <textarea placeholder="내용을 작성해주세요" ref={textareaEl}></textarea>
+              <div className="reply-modal-button-set">
+                <button>작성</button>
+                <button onClick={()=>setVisible(false)}>닫기</button>
+              </div>
+            </div>
         </div>
       </div>
       : null}

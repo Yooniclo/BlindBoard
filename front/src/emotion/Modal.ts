@@ -49,21 +49,50 @@ const ReplyModalWrapper = css`
     left: 50%;
     top: 50%;
     ${media[0]} { width: 90vw; margin-left: -45vw; height: 80vh; margin-top: -40vh;}
-    ${media[1]} { width: 70vw; margin-left: -35vw; height: 40vh; margin-top: -20vh;}
+    ${media[1]} { width: 50vw; margin-left: -25vw; height: 40vh; margin-top: -20vh;}
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 1000;
     border-radius: 10px;
-    div:first-of-type {
+    .reply-wrapper {
+    }
+    .reply-header {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        div{ float: left; width: 50%; }
+        div:first-of-type { text-align: left; padding-left: 30px; box-sizing: border-box; }
+        div:last-of-type { text-align: right; padding-right: 30px; box-sizing: border-box; }
+    }
+    .reply-contents {
+        text-align: left;
+        padding-left: 30px;
+        box-sizing: border-box;
+    }
+    .reply-write-set {
         width: 100%;
         height: 80px;
-        line-height: 80px;
+        margin-top: 10px;
+        textarea{
+            height: 80px;
+            border: none;
+            border-radius: 10px;
+            resize: none;
+            padding: 10px;
+            :focus {
+                outline: none;
+            }
+            ${media[0]} { width: 85vw; }
+            ${media[1]} { width: 45vw; }
+            box-sizing: border-box;
+        }
     }
-    div:last-of-type {
+    .reply-modal-button-set {
         width: 100%;
-        height: 70px;
-        line-height: 70px;
+        height: 42px;
+        line-height: 42px;
         button{
             ${NormalButton}
+            margin: 0px 3px 0px 3px;
         }
     }
 `
