@@ -34,12 +34,12 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
         </div>
         <div>
           {content.content}
-        </div>
-        <div css={ReplyFloatingButton}>
+          <div css={ReplyFloatingButton}>
           <div>1개의 댓글</div>
           <div>
-            <span className="material-icons md-24">quickreply</span>
+            <span className="material-icons md-24" onClick={()=>setVisible(true)}>quickreply</span>
           </div>
+        </div>
         </div>
       </div>
       <div id="BoardFooter">
@@ -54,7 +54,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
         <div css={ModalOverlay}></div>
           <div css={ReplyModalWrapper}>
             <div></div>
-            <div></div>
+            <div><button onClick={()=>setVisible(false)}>닫기</button></div>
         </div>
       </div>
       : null}

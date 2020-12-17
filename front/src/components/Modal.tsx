@@ -16,11 +16,11 @@ const Modal = (props: any) => {
         history.push('/')
     }
 
-    const Route = (props: any) => {
+    const Route = () => {
         return <button onClick={MoveRoute}>확인</button>
     }
 
-    const Normal = (props: any) => {
+    const Normal = () => {
         return <button onClick={()=> dispatch({ type: 'SET_VISIBLE', visible: false })}>확인</button>
     }
 

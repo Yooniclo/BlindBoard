@@ -1,6 +1,10 @@
 import { css } from '@emotion/react'
 import { NormalButton } from './BlindBoard'
 
+const breakpoints = [320, 568]
+
+const media = breakpoints.map( bp => `@media (min-width: ${bp}px)` )
+
 const ModalWrapper = css`
     text-align: center;
     width: 300px;
@@ -41,13 +45,13 @@ const ModalOverlay = css`
 
 const ReplyModalWrapper = css`
     text-align: center;
-    width: 300px;
-    height: 150px;
+    height: 80vh;
     position: fixed;
     left: 50%;
     top: 50%;
-    margin-left: -150px;
-    margin-top: -75px;
+    ${media[0]} { width: 90vw; margin-left: -45vw; }
+    ${media[1]} { width: 70vw; margin-left: -35vw; }
+    margin-top: -40vh;
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 1000;
     border-radius: 10px;

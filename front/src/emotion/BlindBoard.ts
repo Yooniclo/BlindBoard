@@ -56,6 +56,7 @@ const Board = css`
     }
     #BoardFooter{
         display: flex;
+        width: 100%;
         justify-content: center;
         a { text-decoration: none; }
     }
@@ -84,7 +85,10 @@ const BoardRead = css`
         }
     }
     div:nth-of-type(3) {
+        height: 394px;
+        box-sizing: border-box;
         padding: 10px;
+        position: relative;
     }
 `
 const BoardWrite = css`
@@ -132,11 +136,12 @@ const ButtonSet = css`
         align-items: center;
         min-width: 36px;
         height: 36px;
-        :first-of-type{ border-right: 1px solid #dbdbdb; }
-        :last-of-type{ border-left: 1px solid #dbdbdb; }
         cursor: pointer;
         &:hover {
             background-color: #dbdbdb;
+        }
+        ::selection {
+            background-color: #fff;
         }
     }
 `
@@ -168,15 +173,16 @@ const KakaoButton = css`
 `
 const ReplyFloatingButton = css `
     width: 140px;
-    height: 50px;
-    line-height: 30px;
-    position: relative;
+    height: 35px;
+    line-height: 33px;
+    bottom: 10px;
+    position: absolute;
     right: 10px;
     float: right;
-    ${media[0]} { top: 315px; }
-    ${media[1]} { top: 305px; }
     div { display: inline-block; }
     div:first-of-type {
+        position: relative;
+        right: 10px;
         width: 100px;
         text-align: right;
     }
@@ -188,7 +194,7 @@ const ReplyFloatingButton = css `
         border-radius: 35px;
         width: 35px;
         height: 35px;
-        position: relative;
+        position: absolute;
         cursor: pointer;
         &:hover {
             background-color: #dbdbdb;
