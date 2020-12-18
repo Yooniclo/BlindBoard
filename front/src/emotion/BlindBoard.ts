@@ -94,7 +94,7 @@ const BoardRead = css`
 const BoardWrite = css`
     textarea {
         width: 100%;
-        height: 415px;
+        height: 399px;
         border: none;
         border-radius: 10px;
         resize: none;

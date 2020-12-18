@@ -92,6 +92,9 @@ const ReplyModalWrapper = css`
             box-sizing: border-box;
         }
     }
+    .no-reply {
+        margin-top: 170px;
+    }
     .reply-modal-button-set {
         width: 100%;
         height: 42px;

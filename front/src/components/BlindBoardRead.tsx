@@ -5,6 +5,7 @@ import { ModalOverlay, ReplyModalWrapper } from '../emotion/Modal'
 import { RouteComponentProps } from 'react-router'
 import { Link } from 'react-router-dom'
 import TimeToString from './Common'
+import BlankCheck from './Validation'
 
 interface MatchParams {
   id: string
@@ -73,6 +74,40 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
       content: textareaEl.current?.value.replace(/'/g, "\\'")
     }
 
+    if(!BlankCheck(data.content)){
+      let textarea: any = document.querySelector('textarea')
+      let animation_count = 0
+      let rotate_count = 0
+      let flag = false
+      const run = () => {
+         if(rotate_count < 4 && flag === false) {
+          rotate_count++
+          if(rotate_count === 4) {
+            flag = true
+            animation_count++
+          }
+         }
+         if(rotate_count > -4 && flag === true) {
+           rotate_count--
+           if(rotate_count === -4) {
+             flag = false
+             animation_count++
+           }
+         }
+
+        if(animation_count === 5) {
+          textarea.style.transform = 'rotate(0deg)'
+          return
+        }
+        
+        textarea.style.transform = 'rotate(' + rotate_count + 'deg)'
+        requestAnimationFrame(run)
+      }
+      
+      requestAnimationFrame(run)
+      return false
+    }
+
     const response = await fetch('http://localhost:3000/backend/reply/write', {
       method: 'POST',
       headers: {
@@ -84,6 +119,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
     const result = await response.json()
     if(result.message === 'Success') {
       setAddReplyContent(data)
+      setReplyCount(1)
     }
   }
 
@@ -93,7 +129,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
       <div css={ModalOverlay}></div>
         <div css={ReplyModalWrapper}>
           <div className="reply-container">
-            {reply_contents.map((v: any, i:any) => (
+            {reply_count !== 0 ? reply_contents.map((v: any, i:any) => (
               <div className="reply-wrapper" key={v.id}>
                 <div className="reply-header">
                   <div>{v.author}</div>
@@ -101,7 +137,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
                 </div>
                 <div className="reply-contents">{v.content}</div>
               </div>
-            ))}
+            )): <div className="no-reply">아직 댓글이 달리지 않았습니다. <br />댓글을 작성해주세요😙</div>}
             {add_reply_content !== null ?
               <div className="reply-wrapper">
                 <div className="reply-header">
@@ -110,8 +146,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
                 </div>
                 <div className="reply-contents">{add_reply_content.content}</div>
               </div>
-            : null
-            }
+            : null}
           </div>
           <div className="reply-write-set">
             <textarea placeholder="내용을 작성해주세요" ref={textareaEl}></textarea>
