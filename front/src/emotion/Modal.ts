@@ -48,15 +48,20 @@ const ReplyModalWrapper = css`
     position: fixed;
     left: 50%;
     top: 50%;
-    ${media[0]} { width: 90vw; margin-left: -45vw; height: 80vh; margin-top: -40vh;}
-    ${media[1]} { width: 50vw; margin-left: -25vw; height: 40vh; margin-top: -20vh;}
+    ${media[0]} { width: 90vw; margin-left: -45vw; height: 85vh; margin-top: -42.5vh;}
+    ${media[1]} { width: 30vw; margin-left: -15vw; height: 460px; margin-top: -22.5vh;}
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 1000;
     border-radius: 10px;
     .reply-container{
         padding-top: 10px;
-        height: 380px;
+        box-sizing: border-box;
+        ${media[0]} { height: 67vh; }
+        ${media[1]} { height: 320px; }
         overflow: scroll;
+        &::-webkit-scrollbar { 
+            display: none;
+        }
     }
     .reply-wrapper {
         
@@ -88,7 +93,7 @@ const ReplyModalWrapper = css`
                 outline: none;
             }
             ${media[0]} { width: 85vw; }
-            ${media[1]} { width: 45vw; }
+            ${media[1]} { width: 27.5vw; }
             box-sizing: border-box;
         }
     }

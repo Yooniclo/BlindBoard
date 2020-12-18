@@ -79,6 +79,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
       let animation_count = 0
       let rotate_count = 0
       let flag = false
+      
       const run = () => {
          if(rotate_count < 4 && flag === false) {
           rotate_count++
