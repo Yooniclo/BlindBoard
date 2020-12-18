@@ -45,14 +45,22 @@ router.get('/backend/read/:id', async (ctx: Context) => {
 })
 
 router.get('/backend/reply/count/:id', async (ctx: Context) => {
-    const rows = await pool.query(`SELECT count(*) AS count FROM reply WHERE list_id = ${ctx.params.id}`)
-    console.log(rows)
-    ctx.body = rows[0]
+    const rows = await pool.query(`SELECT count(id) AS count FROM reply WHERE list_id = ${ctx.params.id}`)
+    ctx.body = rows
 })
 
 router.get('/backend/reply/read/:id', async (ctx: Context) => {
     const rows = await pool.query(`SELECT * FROM reply WHERE list_id = ${ctx.params.id}`)
     ctx.body = rows[0]
+})
+
+router.post('/backend/reply/write', async (ctx: Context) => {
+    const result: any = await pool.query(`INSERT INTO reply(list_id, author, time, content) VALUES 
+    (${ctx.request.body.list_id}, '${ctx.request.body.author}', NOW(), '${ctx.request.body.content}')`)
+
+    if(result[0].affectedRows === 1) {
+        ctx.body = {message: 'Success'}
+    }
 })
 
 router.post('/backend/write', async (ctx: Context) => {

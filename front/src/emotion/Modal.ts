@@ -53,7 +53,13 @@ const ReplyModalWrapper = css`
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 1000;
     border-radius: 10px;
+    .reply-container{
+        padding-top: 10px;
+        height: 380px;
+        overflow: scroll;
+    }
     .reply-wrapper {
+        
     }
     .reply-header {
         width: 100%;

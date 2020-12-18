@@ -33,6 +33,8 @@ const BlindBoardWrite = () => {
       content: string | undefined
     }
 
+    console.log(textareaEl.current?.value.replace(/'/g, "\\'"))
+
     const data: Data = {
       title: inputEl.current?.value.replace(/'/g, "\\'"),
       author: nickname,
@@ -63,7 +65,7 @@ const BlindBoardWrite = () => {
   }
 
   return (  
-    useTokenState().token=== 'Not Set'
+    useTokenState().token === 'Not Set'
     ?
     <Redirect to='/signin' />
     :
