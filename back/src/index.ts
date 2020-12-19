@@ -18,11 +18,11 @@ app.use(router.routes())
 app.use(Serve(Path.join(__dirname, '../public')))
 
 const pool = Mysql.createPool({
-    host: '13.209.54.66',
+    host: '15.165.250.78',
     user: 'root',
     password: 'wopsdf',
     connectionLimit: 4,
-    database: 'blindboard'
+    database: 'blind_board'
 })
 
 app.use(async ctx => {
