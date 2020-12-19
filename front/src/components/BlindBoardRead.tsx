@@ -136,7 +136,11 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
                   <div>{v.author}</div>
                   <div>{TimeToString(v.time)}</div>
                 </div>
-                <div className="reply-contents">{v.content}</div>
+                <div className="reply-contents">
+                  <pre>
+                    {v.content}
+                  </pre>
+                </div>
               </div>
             )): <div className="no-reply">아직 댓글이 달리지 않았습니다. <br />댓글을 작성해주세요😙</div>}
             {add_reply_content !== null ?
@@ -145,7 +149,9 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
                   <div>{add_reply_content.author}</div>
                   <div>{TimeToString(add_reply_content.time)}</div>
                 </div>
-                <div className="reply-contents">{add_reply_content.content}</div>
+                <div className="reply-contents">
+                  <pre>{add_reply_content.content}</pre>
+                </div>
               </div>
             : null}
           </div>

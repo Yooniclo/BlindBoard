@@ -175,7 +175,7 @@ const ReplyFloatingButton = css `
     width: 140px;
     height: 35px;
     line-height: 33px;
-    bottom: 10px;
+    bottom: 15px;
     position: absolute;
     right: 10px;
     float: right;
