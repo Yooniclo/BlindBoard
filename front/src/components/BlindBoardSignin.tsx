@@ -4,8 +4,6 @@ import { Link, useHistory } from 'react-router-dom'
 import KakaoLogin from 'react-kakao-login'
 import { useTokenDispatch } from '../context/TokenContext'
 
-const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
-
 const token = 'f6bd932bc52711ad6c4b449f63c5261b'
 
 const BlindBoardSignin = () => { 

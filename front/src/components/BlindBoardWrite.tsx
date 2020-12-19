@@ -5,8 +5,6 @@ import { useModalDispatch } from '../context/ModalContext'
 import { useTokenState } from '../context/TokenContext'
 import BlankCheck from './Validation'
 
-const PORT = process.env.NODE_ENV === 'development'? 3000 : 80
-
 const BlindBoardWrite = () => { 
 
   const dispatch = useModalDispatch()

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import ReactDOM from 'react-dom'
 import { Board, ButtonSet, BoardRead, ReplyFloatingButton } from '../emotion/BlindBoard'
 import { ModalOverlay, ReplyModalWrapper } from '../emotion/Modal'
 import { RouteComponentProps } from 'react-router'
