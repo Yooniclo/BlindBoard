@@ -12,7 +12,7 @@ const BlindBoard = () => {
   useEffect(() => { 
     listMax = 10
     const GetList = async () => {
-      const response = await fetch('http://localhost:3000/init')
+      const response = await fetch(process.env.REACT_APP_URL + '/init')
       let json = await response.json()
       setTotal(json)
       setList(json.filter((v: string | number, i: number) => i < listMax))

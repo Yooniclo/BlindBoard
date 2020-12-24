@@ -31,12 +31,12 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
     //   console.log(err)
     // })
     const ReadContent = async () => {
-      const response = await fetch('http://localhost:3000/backend/read/' + match.params.id)
+      const response = await fetch(process.env.REACT_APP_URL + '/backend/read/' + match.params.id)
       let json = await response.json()
       setContent(json[0])
     }
     const ReplyCount = async () => {
-      const response = await fetch('http://localhost:3000/backend/reply/count/' + match.params.id)
+      const response = await fetch(process.env.REACT_APP_URL + '/backend/reply/count/' + match.params.id)
       let json = await response.json()
       setReplyCount(json[0][0].count)
     }
@@ -45,7 +45,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
   }, [match.params.id])
 
   const OpenReplyModal = async() => {
-    const response = await fetch('http://localhost:3000/backend/reply/read/' + match.params.id)
+    const response = await fetch(process.env.REACT_APP_URL + '/backend/reply/read/' + match.params.id)
     let json = await response.json()
     setReplyContents(json)  
     setVisible(true)
@@ -108,7 +108,7 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
       return false
     }
 
-    const response = await fetch('http://localhost:3000/backend/reply/write', {
+    const response = await fetch(process.env.REACT_APP_URL + '/backend/reply/write', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
