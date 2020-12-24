@@ -2,6 +2,7 @@
   "name": "blindboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/blindboard",
   "dependencies": {
     "@babel/core": "7.12.3",
     "@emotion/babel-preset-css-prop": "^10.2.0",

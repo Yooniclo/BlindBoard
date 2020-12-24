@@ -9,7 +9,7 @@ import { ModalProvider } from './context/ModalContext'
 import { TokenProvider } from './context/TokenContext'
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/blindboard">
     <Switch>
       <TokenProvider>
         <Route exact path='/' component={BlindBoard} />

@@ -89,6 +89,7 @@ const BoardRead = css`
         box-sizing: border-box;
         padding: 10px;
         position: relative;
+        overflow: auto;
     }
 `
 const BoardWrite = css`

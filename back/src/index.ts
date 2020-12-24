@@ -26,7 +26,7 @@ const pool = Mysql.createPool({
 })
 
 app.use(async ctx => {
-    await Sendfile(ctx, Path.join(__dirname, '../public/index.html'))
+    await Sendfile(ctx, Path.join(__dirname, '../public/blindboard/index.html'))
 })
 
 router.get('/init', async (ctx: Context) => {
