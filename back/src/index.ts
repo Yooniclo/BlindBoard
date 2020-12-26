@@ -8,6 +8,8 @@ const Cors = require('koa2-cors')
 const Serve = require('koa-static')
 const Sendfile = require('koa-sendfile')
 const Bodyparser = require('koa-bodyparser')
+const https = require('https')
+const fs = require('fs')
 
 const app = new Koa() 
 const router = new Router()
@@ -23,6 +25,25 @@ const pool = Mysql.createPool({
     password: 'wopsdf',
     connectionLimit: 4,
     database: 'blind_board'
+})
+
+var config = {
+    domain: 'littlehero.io',
+    https: {
+      port: 3000,
+      options: {
+        key: fs.readFileSync(Path.resolve(process.cwd(), 'src/ssl/privkey1.pem'), 'utf8').toString(),
+        cert: fs.readFileSync(Path.resolve(process.cwd(), 'src/ssl/fullchain1.pem'), 'utf8').toString()
+      }
+    }
+}
+
+let serverCallback = app.callback()
+let httpsServer = https.createServer(config.https.options, serverCallback)
+
+
+httpsServer.listen(config.https.port, () => {
+    console.log('server is listening to port 3000')
 })
 
 app.use(async ctx => {
@@ -76,8 +97,4 @@ router.post('/backend/write', async (ctx: Context) => {
         // ctx.cookies.set('access_token', token, { httpOnly: false, maxAge: 1000 * 60 * 60 * 24 * 7 })
         ctx.body = {message: 'Success'}
     }
-})
-
-app.listen(3000, () => {
-    console.log('server is listening to port 3000')
 })
