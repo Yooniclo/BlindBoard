@@ -56,7 +56,7 @@ const ReplyModalWrapper = css`
     .reply-container{
         padding-top: 10px;
         box-sizing: border-box;
-        ${media[0]} { height: 67vh; }
+        ${media[0]} { height: 50vh; }
         ${media[1]} { height: 320px; }
         overflow: scroll;
         &::-webkit-scrollbar { 
@@ -64,25 +64,29 @@ const ReplyModalWrapper = css`
         }
     }
     .reply-wrapper {
-        
+        padding-bottom: 10px;
     }
     .reply-header {
         width: 100%;
         height: 30px;
         line-height: 30px;
         div{ float: left; width: 50%; }
-        div:first-of-type { text-align: left; padding-left: 30px; box-sizing: border-box; }
-        div:last-of-type { text-align: right; padding-right: 30px; box-sizing: border-box; }
+        div:first-of-type { text-align: left; padding-left: 15px; box-sizing: border-box; }
+        div:last-of-type { text-align: right; padding-right: 15px; box-sizing: border-box; }
     }
     .reply-contents {
         text-align: left;
-        padding-left: 30px;
+        padding-left: 15px;
         box-sizing: border-box;
     }
     .reply-write-set {
+        display: flex;
+        flex-direction: column;
+        .reply-write-wrapper { margin-top: auto; margin-bottom: 10px;}
+        
         width: 100%;
-        height: 80px;
-        margin-top: 10px;
+        ${media[0]} { height: 35vh; }
+        ${media[1]} { height: 140px; }
         textarea{
             height: 80px;
             border: none;

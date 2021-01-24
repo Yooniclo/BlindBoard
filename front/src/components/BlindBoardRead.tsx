@@ -132,8 +132,8 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
             {reply_count !== 0 ? reply_contents.map((v: any, i:any) => (
               <div className="reply-wrapper" key={v.id}>
                 <div className="reply-header">
-                  <div>{v.author}</div>
-                  <div>{TimeToString(v.time)}</div>
+                  <div>🙂{v.author}</div>
+                  <div>🧭{TimeToString(v.time)}</div>
                 </div>
                 <div className="reply-contents">
                   <pre>
@@ -155,10 +155,12 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
             : null}
           </div>
           <div className="reply-write-set">
-            <textarea placeholder="내용을 작성해주세요" ref={textareaEl}></textarea>
-            <div className="reply-modal-button-set">
-              <button onClick={ReplyWrite}>작성</button>
-              <button onClick={CloseReplyModal}>닫기</button>
+            <div className="reply-write-wrapper">
+              <textarea placeholder="내용을 작성해주세요" ref={textareaEl}></textarea>
+              <div className="reply-modal-button-set">
+                <button onClick={ReplyWrite}>작성</button>
+                <button onClick={CloseReplyModal}>닫기</button>
+              </div>
             </div>
           </div>
       </div>
@@ -179,8 +181,8 @@ const BlindBoardRead = ({match}: RouteComponentProps<MatchParams>) => {
       <div id="Board" css={BoardRead}>
         <div className="content-title">{content.title}</div>
         <div className="content-body">
-          <span>{content.author}</span>
-          <span>{TimeToString(content.time)}</span>
+          <span>🙂{content.author}</span>
+          <span>🧭{TimeToString(content.time)}</span>
         </div>
         <div>
           <pre>{content.content}</pre>

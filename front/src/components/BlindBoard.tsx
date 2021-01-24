@@ -46,8 +46,8 @@ const BlindBoard = () => {
           <ul key={v.id} data-id={v.id}>
             <Link to={`/read/${v.id}`}>
               <li>{v.title.length > 26 ? v.title.substr(0, 20) + '...' : v.title}</li>
-              <li>{v.author}</li>
-              <li>{TimeToString(v.time)}</li>
+              <li>🙂{v.author}</li>
+              <li>🧭{TimeToString(v.time)}</li>
             </Link>
           </ul>
         ))}

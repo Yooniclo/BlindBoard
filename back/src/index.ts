@@ -29,22 +29,29 @@ const pool = Mysql.createPool({
 
 var config = {
     domain: 'littlehero.io',
+    port: 3000,
     https: {
-      port: 3000,
       options: {
-        key: fs.readFileSync(Path.resolve(process.cwd(), '../../https-ssl/privkey1.pem'), 'utf8').toString(),
-        cert: fs.readFileSync(Path.resolve(process.cwd(), '../../https-ssl/fullchain1.pem'), 'utf8').toString()
+        // key: fs.readFileSync(Path.resolve(process.cwd(), '../../https-ssl/privkey1.pem'), 'utf8').toString(),
+        // cert: fs.readFileSync(Path.resolve(process.cwd(), '../../https-ssl/fullchain1.pem'), 'utf8').toString()
       }
     }
 }
 
-let serverCallback = app.callback()
-let httpsServer = https.createServer(config.https.options, serverCallback)
+if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === undefined) {
+    app.listen(config.port, () => {
+        console.log('server is listening to port 3000 on http')
+    })
+} else {
+    let serverCallback = app.callback()
+    let httpsServer = https.createServer(config.https.options, serverCallback)
 
 
-httpsServer.listen(config.https.port, () => {
-    console.log('server is listening to port 3000')
-})
+    httpsServer.listen(config.port, () => {
+        console.log('server is listening to port 3000 on https')
+    })
+}
+
 
 app.use(async ctx => {
     await Sendfile(ctx, Path.join(__dirname, '../public/blindboard/index.html'))
