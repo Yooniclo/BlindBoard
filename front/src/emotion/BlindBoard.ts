@@ -45,9 +45,9 @@ const Board = css`
             height: 48px; 
             line-height: 48px;
             text-align: center;
-            :nth-of-type(1) { width: 60%; }
+            :nth-of-type(1) { width: 55%; }
             :nth-of-type(2) { width: 25%; }
-            :nth-of-type(3) { width: 15%; }
+            :nth-of-type(3) { width: 20%; }
         }
         textarea{
             width: 100%;
@@ -176,8 +176,8 @@ const ReplyFloatingButton = css `
     width: 140px;
     height: 35px;
     line-height: 33px;
-    bottom: 15px;
-    position: absolute;
+    bottom: 20px;
+    position: fixed;
     right: 10px;
     float: right;
     div { display: inline-block; }
